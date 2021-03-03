@@ -1,0 +1,35 @@
+.app-wrapper {
+  margin: 0 auto;
+  display: grid;
+  width: 1200px;
+
+  grid-template-areas:
+  "h h"
+  "n c"; /*расположение частей грида*/
+
+
+  grid-template-rows: 60px 1fr; /*2 x row, первая строка занимает 60 пикс, остальное это 1 фракция */
+  grid-template-columns: 2fr 10fr; /*2 x col, одна занимает 2 фракции, вторая 10 фракций, суммарно получается 12 частей*/
+  grid-gap: 10px;
+}
+
+.header {
+  grid-area: h;
+  background-color: green;
+
+}
+
+.nav {
+  grid-area: n;
+  background-color: blueviolet;
+}
+
+.content {
+  grid-area: c;
+  background-color: crimson;
+
+}
+
+.header__image {
+  width: 50px;
+}
