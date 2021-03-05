@@ -12,3 +12,10 @@
   grid-template-columns: 2fr 10fr; /*2 x col, одна занимает 2 фракции, вторая 10 фракций, суммарно получается 12 частей*/
   grid-gap: 10px;
 }
+
+
+.app-wrapper-content {
+  grid-area: c;
+  background-color: rgb(43, 226, 52);
+}
+
