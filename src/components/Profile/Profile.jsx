@@ -1,4 +1,5 @@
-import s from './Navbar.module.css';
+import s from './Profile.module.css';
+import MyPosts from './MyPosts/MyPosts.jsx'
 
 const Profile = () => {
     return (
@@ -9,18 +10,7 @@ const Profile = () => {
         <div>
           ava+description
         </div>
-        <div>
-          my posts
-          <div>
-            new post
-          </div>
-          <div class={s.item}>
-            post 1
-          </div>
-          <div class={s.item}>
-            post 2
-          </div>
-        </div>
+        <MyPosts />
       </div>
     );
 }
