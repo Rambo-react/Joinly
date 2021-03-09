@@ -1,16 +1,12 @@
 import s from './Profile.module.css';
 import MyPosts from './MyPosts/MyPosts';
+import ProfileInfo from './ProfileInfo/ProfileInfo';
 
-const Profile = () => {
+const Profile = (props) => {
   return (
     <div>
-      <div>
-        <img src="https://www.gettyimages.pt/gi-resources/images/Homepage/Hero/PT/PT_hero_42_153645159.jpg"></img>
-      </div>
-      <div>
-        ava+description
-        </div>
-      <MyPosts />
+      <ProfileInfo />
+      <MyPosts postsData={props.postsData} />
     </div>
   );
 }
