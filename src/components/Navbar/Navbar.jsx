@@ -5,6 +5,7 @@ import s from './Navbar.module.css';
 
 const Navbar = () => {
   return (
+    <div>
     <nav className={s.nav}>
       <div className={s.item}>
         <NavLink to="/profile" activeClassName={s.activeLink}>Profile</NavLink>
@@ -22,6 +23,11 @@ const Navbar = () => {
         <NavLink to='/settings' activeClassName={s.activeLink}>Settings</NavLink>
       </div>
     </nav>
+    <div className={s.Friends}>
+    
+          Friends
+    </div>
+    </div>
   );
 }
 
