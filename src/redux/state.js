@@ -7,7 +7,9 @@ let state = {
             { id: 1, message: "Hello? how are you?", likesCount: 0 },
             { id: 2, message: "It's my first post.", likesCount: 25 },
             { id: 3, message: "Yo", likesCount: 30 }
-        ]
+        ],
+
+        newPostText : "Enter your post"
     },
 
     dialogsPage: {
@@ -26,7 +28,9 @@ let state = {
             { id: 2, message: "Are you fine?" },
             { id: 3, message: "What is your name?" },
             { id: 4, message: "Hello" }
-        ]
+        ],
+
+        newMessageText : "Enter your Message"
 
     },
 
@@ -43,18 +47,45 @@ let state = {
     }
 }
 
-export let addPost = (postMessage) => { /*сюда пришел props из MyPosts.jsx из  
-                                            функции buttonAddPost , в которую мы прокинули эту функцию "addPost" через пропсы*/
+/* ========================== MESSAGE*/
+export let addMessage = () => { 
 
-debugger;
+    let newMessage = {
+        id: 5,
+        message:  state.dialogsPage.newMessageText
+    };
+
+    state.dialogsPage.messagesData.push(newMessage);
+    state.dialogsPage.newMessageText = '';
+    rerenderEntireTree(state);
+};
+
+export let updateNewMessageText = (newText) => { 
+    
+    state.dialogsPage.newMessageText = newText;
+    rerenderEntireTree(state);
+};
+
+/* ========================== MYPOSTS*/
+
+export let addPost = () => { 
+    /*сюда пришел props из MyPosts.jsx из функции buttonAddPost , в которую мы прокинули эту функцию "addPost" через пропсы*/
 
     let newPost = {
         id: 4,
-        message:  postMessage ,
+        message:  state.profilePage.newPostText,
         likesCount: 0
     };
 
     state.profilePage.postsData.push(newPost);
+    state.profilePage.newPostText = '';
+    rerenderEntireTree(state);
+};
+
+export let updateNewPostText = (newText) => { 
+    /*обновляем каждый символ в textarea через state и прокидываем через пропсы на событие onChange в value*/
+    
+    state.profilePage.newPostText = newText;
     rerenderEntireTree(state);
 };
 
