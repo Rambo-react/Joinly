@@ -3,19 +3,18 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import { BrowserRouter } from 'react-router-dom';
-import {addMessage, addPost, subsribe, updateNewMessageText, updateNewPostText} from './redux/state';
-import state from './redux/state';
+import store from './redux/state';
 import reportWebVitals from './reportWebVitals';
 
 
 
-let rerenderEntireTree = (state) => {
+let rerenderEntireTree = (state) => { /*state сюда передаём через функцию rerenderEntireTree(store.getState()); и дальше передаём в App */
     ReactDOM.render(
         <React.StrictMode>
           <BrowserRouter>
 
-            <App state={state} addPost={addPost} updateNewPostText={updateNewPostText} addMessage={addMessage} 
-            updateNewMessageText={updateNewMessageText}
+            <App state={state} addPost={store.addPost.bind(store)} updateNewPostText={store.updateNewPostText.bind(store)} addMessage={store.addMessage.bind(store)} 
+            updateNewMessageText={store.updateNewMessageText.bind(store)}
             />
 
           </BrowserRouter>
@@ -24,9 +23,9 @@ let rerenderEntireTree = (state) => {
       );
 }
 
-rerenderEntireTree(state);
+rerenderEntireTree(store.getState()); /* передаём state в  let rerenderEntireTree = (state) => { */
 
-subsribe(rerenderEntireTree);
+store.subsribe(rerenderEntireTree);
 
 
 
