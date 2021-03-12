@@ -1,4 +1,7 @@
-import { rerenderEntireTree } from "../render";
+
+let rerenderEntireTree = () => {
+    console.log();
+}
 
 let state = {
     profilePage: {
@@ -48,7 +51,7 @@ let state = {
 }
 
 /* ========================== MESSAGE*/
-export let addMessage = () => { 
+export const addMessage = () => { 
 
     let newMessage = {
         id: 5,
@@ -60,7 +63,7 @@ export let addMessage = () => {
     rerenderEntireTree(state);
 };
 
-export let updateNewMessageText = (newText) => { 
+export const updateNewMessageText = (newText) => { 
     
     state.dialogsPage.newMessageText = newText;
     rerenderEntireTree(state);
@@ -68,7 +71,7 @@ export let updateNewMessageText = (newText) => {
 
 /* ========================== MYPOSTS*/
 
-export let addPost = () => { 
+export const addPost = () => { 
     /*сюда пришел props из MyPosts.jsx из функции buttonAddPost , в которую мы прокинули эту функцию "addPost" через пропсы*/
 
     let newPost = {
@@ -82,11 +85,15 @@ export let addPost = () => {
     rerenderEntireTree(state);
 };
 
-export let updateNewPostText = (newText) => { 
+export const updateNewPostText = (newText) => { 
     /*обновляем каждый символ в textarea через state и прокидываем через пропсы на событие onChange в value*/
     
     state.profilePage.newPostText = newText;
     rerenderEntireTree(state);
 };
+
+export const subsribe = (observer) => {
+    rerenderEntireTree = observer; /*переопределили функцию */
+}
 
 export default state;
