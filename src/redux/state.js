@@ -47,56 +47,78 @@ let store =  {
         }
     },
 
-    getState() {
-        return (this._state);
-    },
-
     _callSubscriber() {
         console.log();
     },
 
+    getState() {
+        return (this._state);
+    },
+
     /* ========================== MESSAGE*/
-    addMessage() { 
+    // addMessage() { 
 
-        let newMessage = {
-            id: 5,
-            message:  this._state.dialogsPage.newMessageText
-        };
+    //     let newMessage = {
+    //         id: 5,
+    //         message:  this._state.dialogsPage.newMessageText
+    //     };
     
-        this._state.dialogsPage.messagesData.push(newMessage);
-        this._state.dialogsPage.newMessageText = '';
-        this._callSubscriber(this._state);
-    },
+    //     this._state.dialogsPage.messagesData.push(newMessage);
+    //     this._state.dialogsPage.newMessageText = '';
+    //     this._callSubscriber(this._state);
+    // },
 
-    updateNewMessageText(newText) { 
-        this._state.dialogsPage.newMessageText = newText;
-        this._callSubscriber(this._state);
-    },
+    // updateNewMessageText(newText) { 
+    //     this._state.dialogsPage.newMessageText = newText;
+    //     this._callSubscriber(this._state);  
+    // },
 
     /* ========================== MYPOSTS*/
-    addPost() { 
-        /*сюда пришел props из MyPosts.jsx из функции buttonAddPost , в которую мы прокинули эту функцию "addPost" через пропсы*/
+    // addPost() { 
+    //     /*сюда пришел props из MyPosts.jsx из функции buttonAddPost , в которую мы прокинули эту функцию "addPost" через пропсы*/
     
-        let newPost = {
-            id: 4,
-            message:  this._state.profilePage.newPostText,
-            likesCount: 0
-        };
-    
-        this._state.profilePage.postsData.push(newPost);
-        this._state.profilePage.newPostText = '';
-        this._callSubscriber(this._state);
-    },
-    
-    updateNewPostText(newText) { 
-        /*обновляем каждый символ в textarea через state и прокидываем через пропсы на событие onChange в value*/
         
-        this._state.profilePage.newPostText = newText;
-        this._callSubscriber(this._state);
-    },
+    // },
+    
+    // updateNewPostText(newText) { 
+    //     /*обновляем каждый символ в textarea через state и прокидываем через пропсы на событие onChange в value*/
+    //     this._state.profilePage.newPostText = newText;
+    //         this._callSubscriber(this._state);
+      
+    // },
     
     subsribe(observer) {
         this._callSubscriber = observer; /*переопределили функцию */
+    },
+
+    dispatch(action) { //{ type: 'ADD-POST'} передаём свойство type
+        if (action.type === 'ADD-POST') {
+            let newPost = {
+                id: 4,
+                message:  this._state.profilePage.newPostText,
+                likesCount: 0 };
+        
+            this._state.profilePage.postsData.push(newPost);
+            this._state.profilePage.newPostText = '';
+            this._callSubscriber(this._state);
+
+        } else if (action.type === 'UPDATE-NEW-POST-TEXT') {
+            this._state.profilePage.newPostText = action.newText;
+            this._callSubscriber(this._state);
+
+        } else if (action.type === 'ADD-MESSAGE') {
+            let newMessage = {
+                id: 5,
+                message:  this._state.dialogsPage.newMessageText };
+        
+            this._state.dialogsPage.messagesData.push(newMessage);
+            this._state.dialogsPage.newMessageText = '';
+            this._callSubscriber(this._state);
+
+        } else if (action.type === 'UPDATE-NEW-MESSAGE-TEXT') {
+            this._state.dialogsPage.newMessageText = action.newText;
+            this._callSubscriber(this._state);
+        }
     }
 
 }
