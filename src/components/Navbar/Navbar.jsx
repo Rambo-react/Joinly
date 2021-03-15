@@ -3,7 +3,6 @@ import MyFriends from './MyFriends/MyFriends';
 import s from './Navbar.module.css';
 
 
-
 const Navbar = (props) => {
   
   return (

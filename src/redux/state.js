@@ -1,3 +1,9 @@
+import dialogsReducer from "./dialogs-reducer";
+import profileReducer from "./profile-reducer";
+import sitebarReducer from "./sitebar-reducer";
+
+
+
 
 let store =  {
     _state : {
@@ -30,7 +36,7 @@ let store =  {
                 { id: 4, message: "Hello" }
             ],
     
-            newMessageText : "Enter your Message"
+            newMessageText : ""
     
         },
     
@@ -91,36 +97,19 @@ let store =  {
         this._callSubscriber = observer; /*переопределили функцию */
     },
 
-    dispatch(action) { //{ type: 'ADD-POST'} передаём свойство type
-        if (action.type === 'ADD-POST') {
-            let newPost = {
-                id: 4,
-                message:  this._state.profilePage.newPostText,
-                likesCount: 0 };
-        
-            this._state.profilePage.postsData.push(newPost);
-            this._state.profilePage.newPostText = '';
-            this._callSubscriber(this._state);
+    dispatch(action) { // передаём свойство type
+        this._state.dialogsPage = dialogsReducer(this._state.dialogsPage, action);
+        this._state.profilePage = profileReducer(this._state.profilePage, action);
+        this._state.sitebar = sitebarReducer(this._state.sitebar, action);
 
-        } else if (action.type === 'UPDATE-NEW-POST-TEXT') {
-            this._state.profilePage.newPostText = action.newText;
-            this._callSubscriber(this._state);
+        this._callSubscriber(this._state);
 
-        } else if (action.type === 'ADD-MESSAGE') {
-            let newMessage = {
-                id: 5,
-                message:  this._state.dialogsPage.newMessageText };
-        
-            this._state.dialogsPage.messagesData.push(newMessage);
-            this._state.dialogsPage.newMessageText = '';
-            this._callSubscriber(this._state);
-
-        } else if (action.type === 'UPDATE-NEW-MESSAGE-TEXT') {
-            this._state.dialogsPage.newMessageText = action.newText;
-            this._callSubscriber(this._state);
-        }
     }
 
 }
+
+
+
+
 
 export default store;
