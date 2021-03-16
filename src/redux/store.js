@@ -93,7 +93,7 @@ let store =  {
       
     // },
     
-    subsribe(observer) {
+    subscribe(observer) {
         this._callSubscriber = observer; /*переопределили функцию */
     },
 

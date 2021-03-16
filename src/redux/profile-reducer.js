@@ -1,7 +1,23 @@
 const ADD_POST = 'ADD-POST';
 const UPDATE_NEW_POST_TEXT = 'UPDATE-NEW-POST-TEXT';
 
-const profileReducer = (state,action) => {
+//стэйт по умолчанию
+/*когда первый раз рендер происходит то приходит state = undefined т мы будем использовать стэйт по умолчанию , а потом будет уже рпиходить не пустой state*/
+
+let InitialState = {
+    
+    postsData: [
+        { id: 1, message: "Hello? how are you?", likesCount: 0 },
+        { id: 2, message: "It's my first post.", likesCount: 25 },
+        { id: 3, message: "Yo", likesCount: 30 }
+    ],
+
+    newPostText : "Enter your post"
+};
+ 
+
+const profileReducer = (state = InitialState, action) => {
+  
     switch (action.type) {
         case ADD_POST:
             let newPost = {

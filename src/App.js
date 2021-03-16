@@ -12,11 +12,12 @@ import Settings from './components/Settings/Settings';
 
 
 const App = (props) => {
+  
   return (
     
     <div className='app-wrapper'>
       <Header />
-      <Navbar stateFriends={props.state.siteBar.friendsData} />
+      <Navbar stateFriends={props.state.sitebar.friendsData} />
       <div className='app-wrapper-content'>
 
           <Route path='/dialogs' render={ () => <Dialogs stateDialogs={props.state.dialogsPage} dispatch={props.dispatch} /> } />
