@@ -3,38 +3,38 @@ import { NavLink } from 'react-router-dom';
 import DialogItem from './DialogItem/DialogItem';
 import s from './Dialogs.module.css';
 import Message from './Message/Message';
-import { addMessageActionCreator, updateNewMessageTextActionCreator } from '../../redux/dialogs-reducer';
 
 
 
 
 
 const Dialogs = (props) => {
+debugger;
+    let state = props.dialogsPage;
 
-
-    let DialogElements = props.stateDialogs.dialogsData.map( (d) => {
+    let DialogElements = state.dialogsData.map( (d) => {
        return (<DialogItem name={d.name} id={d.id} />) 
     });
 
-
-    let MessagesElements = props.stateDialogs.messagesData.map( (m) => {
+    let MessagesElements = state.messagesData.map( (m) => {
        return (<Message message={m.message} />) 
     });
 
-    let newMessageElement = React.createRef();
+    let newMessageText = state.newMessageText;
 
     // ADD Message
-    let sendMessage = () => {  
-       
-       props.dispatch(addMessageActionCreator());
+    let onSendMessageClick = () => {  
+       props.sendMessage();
+      
     }
 
     // CHANGE TEXTAREA
     let onMessageChange = (e) => {
        // let textMessage = newMessageElement.current.value;
-       // props.updateNewMessageText(textMessage); 
        let textMessage = e.target.value;
-        props.dispatch(updateNewMessageTextActionCreator(textMessage));    
+       props.updateNewMessageText(textMessage); 
+       
+      //  props.dispatch(updateNewMessageTextActionCreator(textMessage));    
     }
 
 
@@ -53,10 +53,10 @@ const Dialogs = (props) => {
                 <div className={s.blockSendMessage}>
 
                     <div>
-                        <textarea placeholder='Enter your text' onChange={onMessageChange} ref={newMessageElement} value={props.stateDialogs.newMessageText} />
+                        <textarea placeholder='Enter your text' onChange={onMessageChange} value={newMessageText} />
                     </div>
                     <div>
-                        <button onClick={sendMessage} >send message</button>
+                        <button onClick={onSendMessageClick} >send message</button>
                     </div>
                     
                 </div>

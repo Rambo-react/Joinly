@@ -1,6 +1,4 @@
 import React from 'react';
-import { addPostActionCreator, updateNewPostTextActionCreator } from '../../../redux/profile-reducer';
-
 import s from './MyPosts.module.css';
 import Post from './Post/Post';
 
@@ -14,20 +12,17 @@ const MyPosts = (props) => {
     return (<Post message={p.message} likesCount={p.likesCount} />)
   });
 
-  let newPostElement = React.createRef(); /*создали ссылку на элемент textarea*/
+ // let newPostElement = React.createRef(); /*создали ссылку на элемент textarea*/
 
   let buttonAddPost = () => {
-    // props.addPost();
-    props.dispatch(addPostActionCreator());
+     props.addPost();
   }
 
   let onPostChange = (event) => {
-
-    //let text = newPostElement.current.value; /*current свойство, ссылается на нативный html элемент */
-    // props.updateNewPostText(text);
-    // let action = {type:'UPDATE-NEW-POST-TEXT', newText:text};
     let text = event.target.value;
-    props.dispatch(updateNewPostTextActionCreator(text));
+    //let text = newPostElement.current.value; /*current свойство, ссылается на нативный html элемент */
+     props.updateNewPostText(text);
+    
   }
 
   return (
