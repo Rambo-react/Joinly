@@ -5,9 +5,7 @@ import MyPosts from './MyPosts';
 
 
 
-const MyPostsContainer = (props) => {
-
-    
+const MyPostsContainer = () => {
 
     return (
         <StoreContext.Consumer> 

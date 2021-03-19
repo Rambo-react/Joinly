@@ -20,7 +20,7 @@ const MyPosts = (props) => {
 
   let onPostChange = (event) => {
     let text = event.target.value;
-    //let text = newPostElement.current.value; /*current свойство, ссылается на нативный html элемент */
+    
      props.updateNewPostText(text);
     
   }
@@ -32,7 +32,7 @@ const MyPosts = (props) => {
       <div>
 
         <div>
-          {/* <textarea onChange={onPostChange} ref={newPostElement} value={props.newPostText} /> */}
+          
           <textarea onChange={onPostChange} value={props.newPostText} />
         </div>
         <div>

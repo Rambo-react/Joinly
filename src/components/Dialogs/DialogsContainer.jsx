@@ -7,13 +7,12 @@ import Dialogs from './Dialogs';
 
 
 
-const DialogsContainer = (props) => {
-
-
+const DialogsContainer = () => {
 
     return (
         <StoreContext.Consumer>
-            { (store) => {
+            {
+             (store) => {
                 let state = store.getState().dialogsPage;
 
 

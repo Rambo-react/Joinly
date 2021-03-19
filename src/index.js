@@ -9,13 +9,14 @@ import StoreContext from './StoreContext';
 
 
 
-let rerenderEntireTree = (state) => { /*state сюда передаём через функцию rerenderEntireTree(store.getState()); и дальше передаём в App */
+
+let rerenderEntireTree = () => { /*state сюда передаём через функцию rerenderEntireTree(store.getState()); и дальше передаём в App */
     ReactDOM.render(
         <React.StrictMode>
           <BrowserRouter>
 
             <StoreContext.Provider value={store}>
-            <App state={state} />
+            <App  />
             </StoreContext.Provider>
 
           </BrowserRouter>
@@ -24,13 +25,13 @@ let rerenderEntireTree = (state) => { /*state сюда передаём чере
       );
 }
 
-rerenderEntireTree(store.getState()); /* передаём state в  let rerenderEntireTree = (state) => { */
+rerenderEntireTree(); /* передаём state в  let rerenderEntireTree = (state) => { */
 
 
   /*(подписчик/subscribe) срабатывает когда стэйт изменился, и мы запрашиваем стэйт и передаём его в рередренинг*/
 store.subscribe( () => {
-  let state = store.getState();
-  rerenderEntireTree(state);
+  
+  rerenderEntireTree();
 } );
 
 

@@ -9,7 +9,7 @@ import Message from './Message/Message';
 
 
 const Dialogs = (props) => {
-debugger;
+
     let state = props.dialogsPage;
 
     let DialogElements = state.dialogsData.map( (d) => {
@@ -30,11 +30,9 @@ debugger;
 
     // CHANGE TEXTAREA
     let onMessageChange = (e) => {
-       // let textMessage = newMessageElement.current.value;
-       let textMessage = e.target.value;
-       props.updateNewMessageText(textMessage); 
        
-      //  props.dispatch(updateNewMessageTextActionCreator(textMessage));    
+       let textMessage = e.target.value;
+       props.updateNewMessageText(textMessage);     
     }
 
 
