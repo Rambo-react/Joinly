@@ -7,7 +7,6 @@ import MyPosts from './MyPosts';
 
 const MyPostsContainer = (props) => {
 
-    
 
     return (
         <StoreContext.Consumer> 

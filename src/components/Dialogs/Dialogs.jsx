@@ -9,7 +9,7 @@ import Message from './Message/Message';
 
 
 const Dialogs = (props) => {
-debugger;
+
     let state = props.dialogsPage;
 
     let DialogElements = state.dialogsData.map( (d) => {
