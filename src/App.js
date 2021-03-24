@@ -1,10 +1,10 @@
 // import React from 'react';
-import logo from './logo.svg';
+//import logo from './logo.svg';
 import './App.css';
 import Header from './components/Header/Header';
 import Navbar from './components/Navbar/Navbar';
 import Profile from './components/Profile/Profile';
-import {BrowserRouter, Route} from 'react-router-dom';
+import {Route} from 'react-router-dom';
 import Music from './components/Music/Music';
 import News from './components/News/News';
 import Settings from './components/Settings/Settings';
@@ -17,8 +17,7 @@ const App = (props) => {
     
     <div className='app-wrapper'>
       <Header />
-      {/* <Navbar stateFriends={props.state.sitebar.friendsData} /> */}
-      <Navbar  />
+      <Navbar />
       <div className='app-wrapper-content'>
 
           <Route path='/dialogs' render={ () => <DialogsContainer /> } />

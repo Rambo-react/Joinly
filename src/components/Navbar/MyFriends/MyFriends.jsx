@@ -5,7 +5,7 @@ import s from './MyFriends.module.css';
 const MyFriends = (props) => {
 
     let arrayFriends = props.stateFriends.map( (f) => {
-      return(<Friend name={f.name} urlImg={f.urlImg} />)  
+      return(<Friend name={f.name} key={f.id} urlImg={f.urlImg} />)  
     } )
 
     return (

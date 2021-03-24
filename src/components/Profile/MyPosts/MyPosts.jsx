@@ -7,9 +7,8 @@ import Post from './Post/Post';
 
 const MyPosts = (props) => {
 
-
   let postsElements = props.postsData.map((p) => {
-    return (<Post message={p.message} likesCount={p.likesCount} />)
+    return (<Post message={p.message} key={p.id} likesCount={p.likesCount} />)
   });
 
  // let newPostElement = React.createRef(); /*создали ссылку на элемент textarea*/
