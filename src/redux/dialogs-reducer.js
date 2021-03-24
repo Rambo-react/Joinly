@@ -4,7 +4,7 @@ const UPDATE_NEW_MESSAGE_TEXT = 'UPDATE-NEW-MESSAGE-TEXT';
 //state default
 
 let InitialState = {
-    
+
     dialogsData: [
         { id: 1, name: "Dima" },
         { id: 2, name: "Viktor" },
@@ -21,46 +21,39 @@ let InitialState = {
         { id: 4, message: "Hello" }
     ],
 
-    newMessageText : ""
+    newMessageText: ""
 
 };
 
 const dialogsReducer = (state = InitialState, action) => {
 
     switch (action.type) {
-        case ADD_MESSAGE:{
-            let newMessage = {
-                id: 5,
-                message:  state.newMessageText };
-            let stateCopy = {...state};
-            stateCopy.messagesData = [...state.messagesData]; //копируем массив!!! 
-            stateCopy.messagesData.push(newMessage);
-            stateCopy.newMessageText ='';
-            return stateCopy;    
+        case ADD_MESSAGE:
+            let newMessage = { id: 5, message: state.newMessageText };
+            //сразу возвращаем, скопированный стейт, добавляем в конец массива объект newMessage и очищаем текст newMEssageText
+            return {
+                ...state,
+                messagesData: [...state.messagesData, newMessage],
+                newMessageText: ''
+            }
 
-            // state.messagesData.push(newMessage);
-            // state.newMessageText = '';
-            // return state;
-        }
-        case UPDATE_NEW_MESSAGE_TEXT:{
-            let stateCopy = {...state};
-            stateCopy.newMessageText = action.newText;
-            return stateCopy;
+        case UPDATE_NEW_MESSAGE_TEXT:
+            return {
+                ...state,
+                newMessageText: action.newText
+            }
 
-            // state.newMessageText = action.newText;
-            // return state;
-        }
-        default : return state;
+        default: return state;
     }
-  
+
 }
 
 export const addMessageActionCreator = () => {
-    return ({type:ADD_MESSAGE})
+    return ({ type: ADD_MESSAGE })
 }
-
+//action с свйоствами type и newText, которые приходят из Dialogs
 export const updateNewMessageTextActionCreator = (textMessage) => {
-    return ({type:UPDATE_NEW_MESSAGE_TEXT,newText:textMessage})
+    return ({ type: UPDATE_NEW_MESSAGE_TEXT, newText: textMessage })
 }
 
 export default dialogsReducer;
