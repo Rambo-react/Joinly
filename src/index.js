@@ -8,7 +8,7 @@ import reportWebVitals from './reportWebVitals';
 import { Provider } from 'react-redux';
 
     ReactDOM.render(
-        <React.StrictMode>
+        // <React.StrictMode>
           <BrowserRouter>
           
             <Provider store={store}>
@@ -16,8 +16,8 @@ import { Provider } from 'react-redux';
             </Provider>
 
           </BrowserRouter>
-        </React.StrictMode>,
-        document.getElementById('root')
+        // </React.StrictMode>,
+        ,document.getElementById('root')
       );
 
 

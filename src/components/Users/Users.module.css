@@ -1,0 +1,27 @@
+.Users_grid {
+    display: grid;
+
+    grid-template-areas:
+    "i d";
+
+    grid-template-columns: 1fr 6fr;
+    grid-gap: 10px;
+}
+
+.user_img_btn {
+    grid-area: i;
+}
+
+.user_img_btn img {
+    width: 100px;
+    height: 100px;
+}
+
+.user_description {
+    grid-area: d;
+}
+
+.userInfo_flex {
+    display: flex;
+    justify-content: space-between;
+}
