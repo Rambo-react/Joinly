@@ -19,7 +19,6 @@ class Users extends React.Component {
     //     axios.get("https://social-network.samuraijs.com/api/1.0/users").then(response => { //response - ответ , 
     //             this.props.setUsers(response.data.items)
     //         });
-        
     // }
 
 
