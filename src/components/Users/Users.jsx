@@ -1,64 +1,89 @@
+import React from 'react';
 import s from './Users.module.css'
+import * as axios from 'axios'; //ипортируем всё что экспортируется в библиотеке axios с названием "axios" 
+import userPhoto from '../../assets/images/images.png';
 
-
-const Users = (props) => {
-
-    if (props.users.length === 0) {
-        
-        props.setUsers(
-        [ { id: 1, urlImg: "https://cs8.pikabu.ru/post_img/big/2016/07/09/10/1468084255134888644.jpg", followed: true, fullName: "Igor", status: "I'am Best", location: { country: "Belarus", city: "Minsk" } },
-        { id: 2, urlImg: "https://cs8.pikabu.ru/post_img/big/2016/07/09/10/1468084255134888644.jpg", followed: false, fullName: "Oleg", status: "I'am Best of the best", location: { country: "Belarus", city: "Grodno" } },
-        { id: 3, urlImg: "https://cs8.pikabu.ru/post_img/big/2016/07/09/10/1468084255134888644.jpg", followed: true, fullName: "Valera", status: "I'am Best of the best of the best", location: { country: "Russia", city: "Smolensk" } } ]
-        ) //users
+class Users extends React.Component {
+    
+    componentDidMount () {
+        axios.get("https://social-network.samuraijs.com/api/1.0/users").then(response => { //response - ответ , 
+                this.props.setUsers(response.data.items)
+            });
     }
 
-    return (<div>
-        {
-            props.users.map(u => <div key={u.id}>
-                <div className={s.Users_grid}>
-                    <div className={s.user_img_btn}>
-                        <div>
-                            <img src={u.urlImg} />
-                        </div>
-                        <div>
-                            {u.followed ?
-                                <button onClick={() => { props.unfollow(u.id) }} >Unfollow</button> :
-                                <button onClick={() => { props.follow(u.id) }} >Follow</button>
-                            }
+
+    //Есл в конструкторе ничего не выполняется кроме super(props), то его можно не писать 
+    //конструирование объекта происходит одни раз. Если в рамках этой страницы происходят изменения(перерисовывается jsx) - то консруирование новое не происходит. 
+    // constructor(props) {
+    //     super(props);
+    //     axios.get("https://social-network.samuraijs.com/api/1.0/users").then(response => { //response - ответ , 
+    //             this.props.setUsers(response.data.items)
+    //         });
+        
+    // }
 
 
-                        </div>
+    // getUsers = () => {
+    //     if (this.props.users.length === 0) {
+    //         axios.get("https://social-network.samuraijs.com/api/1.0/users").then(response => { //response - ответ , 
+    //             this.props.setUsers(response.data.items)
+    //         });
+    //         //users
+    //     }
 
-                    </div>
+    // }
 
-                    <div className={s.user_description}>
-                        <div className={s.userInfo_flex}>
-                            <div className={s.UserInfo_element}>
-                                <div>{u.fullName}</div>
-                                <div>{u.status}</div>
+ 
+    render() {
+        return (<div>
+            {/* <button onClick={this.getUsers}>Get Users</button> */}
+            {
+                this.props.users.map(u => <div key={u.id}>
+                    <div className={s.Users_grid}>
+                        <div className={s.user_img_btn}>
+                            <div>
+                                <img src={u.photos.small != null ? u.photos.small : userPhoto} />
                             </div>
-                            <div className={s.UserInfo_element}>
-                                <div>{u.location.country}</div>
-                                <div>{u.location.city}</div>
+                            <div>
+                                {u.followed ?
+                                    <button onClick={() => { this.props.unfollow(u.id) }} >Unfollow</button> :
+                                    <button onClick={() => { this.props.follow(u.id) }} >Follow</button>
+                                }
+    
+    
                             </div>
-
-
+    
                         </div>
-
+    
+                        <div className={s.user_description}>
+                            <div className={s.userInfo_flex}>
+                                <div className={s.UserInfo_element}>
+                                    <div>{u.name}</div>
+                                    <div>{u.status}</div>
+                                </div>
+                                <div className={s.UserInfo_element}>
+                                    <div>{"u.location.country"}</div>
+                                    <div>{"u.location.city"}</div>
+                                </div>
+    
+    
+                            </div>
+    
+                        </div>
+    
+    
                     </div>
-
-
-                </div>
-
-
-
-            </div>)
-
-        }
-
-
-
-    </div>)
+    
+    
+    
+                </div>)
+    
+            }
+    
+    
+    
+        </div>)
+    }
 }
 
 export default Users;
