@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from "react-redux";
-import { followAC, setCurrentPageAC, setUsersAC, unfollowAC, setTotalUsersCountAC, toggleIsFetching } from "../../redux/users-reducer";
+import { follow, setCurrentPage, setUsers, unfollow, setTotalUsersCount, toggleIsFetching } from "../../redux/users-reducer";
 import Users from "./Users";
 import * as axios from 'axios'; //ипортируем всё что экспортируется в библиотеке axios с названием "axios" 
 import preloader from '../../assets/images/Hourglass.gif'
@@ -58,16 +58,25 @@ let mapStateToProps = (state) => {
     })
 }
 
-let mapDispatchToProps = (dispatch) => {
-    return ({
-        follow: (userID) => { dispatch(followAC(userID)) ;},
-        unfollow: (userID) => { dispatch(unfollowAC(userID)) ;},
-        setUsers: (users) => { dispatch(setUsersAC(users)) ;},
-        setCurrentPage: (pageNumber) => {dispatch(setCurrentPageAC(pageNumber)); },
-        setTotalUsersCount: (totalUsersCount) => {dispatch(setTotalUsersCountAC(totalUsersCount)); },
-        toggleIsFetching: (isFetching) => {dispatch(toggleIsFetching(isFetching)); }
-    })
-}
+// let mapDispatchToProps = (dispatch) => {
+//     return ({
+//         follow: (userID) => { dispatch(followAC(userID)) ;},
+//         unfollow: (userID) => { dispatch(unfollowAC(userID)) ;},
+//         setUsers: (users) => { dispatch(setUsersAC(users)) ;},
+//         setCurrentPage: (pageNumber) => {dispatch(setCurrentPageAC(pageNumber)); },
+//         setTotalUsersCount: (totalUsersCount) => {dispatch(setTotalUsersCountAC(totalUsersCount)); },
+//         toggleIsFetching: (isFetching) => {dispatch(toggleIsFetching(isFetching)); }
+//     })
+// }
+
+//connect сделает сам колбэки для Action Creator-ов, по этому передаём объект с свойствами, так же можно упростить код:
+// let name=15;
+// let obj = {
+//     //если имя свойства совпадает с его значением , то можно написать просто name
+//     //вместо name: name
+//     name
+// }
 
 
-export default connect(mapStateToProps, mapDispatchToProps)(UsersContainer);
+
+export default connect(mapStateToProps, {follow, unfollow, setUsers, setCurrentPage, setTotalUsersCount, toggleIsFetching})(UsersContainer);
