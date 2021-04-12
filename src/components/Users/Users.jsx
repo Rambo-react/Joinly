@@ -1,6 +1,7 @@
 import React from 'react';
 import s from './Users.module.css';
 import userPhoto from '../../assets/images/images.png';
+import { NavLink } from 'react-router-dom';
 
 let Users = (props) => {
     //расчет количества страниц и создание массива для этих номеров(math.ceil округление до целого числа в большую сторону)
@@ -26,7 +27,10 @@ let Users = (props) => {
                     <div className={s.Users_grid}>
                         <div className={s.user_img_btn}>
                             <div>
+                                
+                              <NavLink to={'/profile/' + u.id}>
                                 <img src={u.photos.small != null ? u.photos.small : userPhoto} />
+                              </NavLink>
                             </div>
                             <div>
                                 {u.followed ?
