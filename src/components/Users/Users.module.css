@@ -29,3 +29,8 @@
 .selectedPage {
     font-weight: bold;
 }
+
+.containerPages {
+    max-width: 760px;
+    overflow: auto;
+}
