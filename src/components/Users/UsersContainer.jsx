@@ -2,42 +2,31 @@ import React from 'react';
 import { connect } from "react-redux";
 import { follow, setCurrentPage, setUsers, unfollow, setTotalUsersCount, toggleIsFetching } from "../../redux/users-reducer";
 import Users from "./Users";
-import * as axios from 'axios'; //ипортируем всё что экспортируется в библиотеке axios с названием "axios" 
 import Preloader from '../common/Preloader/Preloader';
+import { usersAPI } from '../../api/api';
 
 class UsersContainer extends React.Component {
 
     componentDidMount() {
         this.props.toggleIsFetching(true);
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`, 
-        {
-            withCredentials : true,
-            headers: {
-                "API-KEY": "6fb28e57-56fc-4c74-a4a4-e20e0a14b74e"
-            }
-        })
-        .then(response => { //response - ответ  
+
+        usersAPI.getUsers(this.props.currentPage, this.props.pageSize).then(data => { //response - ответ  
             this.props.toggleIsFetching(false);
-            this.props.setUsers(response.data.items);
-            this.props.setTotalUsersCount(response.data.totalCount);
+            this.props.setUsers(data.items);
+            this.props.setTotalUsersCount(data.totalCount);
         });
     }
 
     onPageChanged =(pageNumber) => {
         //диспатчим в стэйт номер страницы, потом сразу же выполняем запрос на сервер 
-        //, по этому мы написали в get запросе page=pageNumber, т.к. в пропсах пока что старые значения, а pageSize нас менять не надо
+        //, по этому мы написали в get запросе page=pageNumber, т.к. в пропсах пока что старые значения, а pageSize нам менять не надо
         this.props.toggleIsFetching(true);
         this.props.setCurrentPage(pageNumber);
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${pageNumber}&count=${this.props.pageSize}`, 
-        {
-            withCredentials : true,
-            headers: {
-                "API-KEY": "6fb28e57-56fc-4c74-a4a4-e20e0a14b74e"
-            }
-        })
-        .then(response => { //response - ответ , 
+        
+        usersAPI.getUsers(pageNumber, this.props.pageSize)
+        .then(data => { //response - ответ , 
         this.props.toggleIsFetching(false);    
-        this.props.setUsers(response.data.items)
+        this.props.setUsers(data.items)
         });
     }
 

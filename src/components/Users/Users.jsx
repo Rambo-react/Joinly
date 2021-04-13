@@ -2,7 +2,7 @@ import React from 'react';
 import s from './Users.module.css';
 import userPhoto from '../../assets/images/images.png';
 import { NavLink } from 'react-router-dom';
-import * as axios from 'axios';
+import { usersAPI } from '../../api/api';
 
 let Users = (props) => {
     //расчет количества страниц и создание массива для этих номеров(math.ceil округление до целого числа в большую сторону)
@@ -36,14 +36,10 @@ let Users = (props) => {
                             <div>
                                 {u.followed ?
                                     <button onClick={() => {
-                                        axios.delete(`https://social-network.samuraijs.com/api/1.0/follow/` + u.id, {
-                                            withCredentials: true,
-                                            headers: {
-                                                "API-KEY": "6fb28e57-56fc-4c74-a4a4-e20e0a14b74e"
-                                            }
-                                        })
-                                            .then(response => { //response - ответ  
-                                                if (response.data.resaultCode == 0) {
+
+                                        usersAPI.unfollowUser(u.id)
+                                            .then(data => { //response - ответ  
+                                                if (data.resaultCode == 0) {
                                                     props.follow(u.id);
                                                 }
 
@@ -53,14 +49,10 @@ let Users = (props) => {
 
                                     }} >Unfollow</button>
                                     : <button onClick={() => {
-                                        axios.post(`https://social-network.samuraijs.com/api/1.0/follow/` + u.id, {}, {
-                                            withCredentials: true,
-                                            headers: {
-                                                "API-KEY": "6fb28e57-56fc-4c74-a4a4-e20e0a14b74e"
-                                            }
-                                        })
-                                            .then(response => { //response - ответ  
-                                                if (response.data.resaultCode == 0) {
+
+                                        usersAPI.followUser(u.id)
+                                            .then(data => { //response - ответ  
+                                                if (data.resaultCode == 0) {
                                                     props.follow(u.id);
                                                 }
 
