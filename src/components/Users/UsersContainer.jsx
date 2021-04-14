@@ -44,6 +44,7 @@ class UsersContainer extends React.Component {
             unfollow={this.props.unfollow}
             toggleFollowingProgress={this.props.toggleFollowingProgress}
             followingInProgress={this.props.followingInProgress}
+            
             />
             </>
         )
@@ -68,7 +69,8 @@ let mapStateToProps = (state) => {
 //         setUsers: (users) => { dispatch(setUsersAC(users)) ;},
 //         setCurrentPage: (pageNumber) => {dispatch(setCurrentPageAC(pageNumber)); },
 //         setTotalUsersCount: (totalUsersCount) => {dispatch(setTotalUsersCountAC(totalUsersCount)); },
-//         toggleIsFetching: (isFetching) => {dispatch(toggleIsFetching(isFetching)); }
+//         toggleIsFetching: (isFetching) => {dispatch(toggleIsFetching(isFetching)); },
+//         toggleFollowingProgress
 //     })
 // }
 
