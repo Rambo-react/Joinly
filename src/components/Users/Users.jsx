@@ -41,19 +41,7 @@ let Users = (props) => {
 
                                         onClick={() => {
 
-                                            props.toggleFollowingProgress(true, u.id);
-
-                                            usersAPI.unfollowUser(u.id)
-                                                .then(data => {
-
-                                                    if (data.resultCode == 0) {
-
-                                                        props.unfollow(u.id);
-                                                    }
-                                                    props.toggleFollowingProgress(false, u.id);
-                                                });
-
-
+                                            props.unfollow(u.id)
 
 
                                         }} >Unfollow</button>
@@ -61,18 +49,7 @@ let Users = (props) => {
 
                                         onClick={() => {
 
-                                            props.toggleFollowingProgress(true, u.id);
-
-                                            usersAPI.followUser(u.id)
-                                                .then(data => {
-
-                                                    if (data.resultCode == 0) {
-
-                                                        props.follow(u.id);
-                                                    }
-                                                    props.toggleFollowingProgress(false, u.id);
-                                                });
-
+                                            props.follow(u.id)
 
                                         }} >Follow</button>
                                 }
