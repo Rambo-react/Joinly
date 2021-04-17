@@ -1,3 +1,5 @@
+import { profileAPI } from "../api/api";
+
 const ADD_POST = 'ADD-POST';
 const UPDATE_NEW_POST_TEXT = 'UPDATE-NEW-POST-TEXT';
 const SET_USER_PROFILE = 'SET_USER_PROFILE';
@@ -12,7 +14,7 @@ let InitialState = {
         { id: 3, message: "Yo", likesCount: 30 }
     ],
     newPostText: "Enter your post",
-    profile:null
+    profile: null
 };
 
 
@@ -34,7 +36,7 @@ const profileReducer = (state = InitialState, action) => {
             }
 
         case SET_USER_PROFILE:
-            return {...state, profile: action.profile}
+            return { ...state, profile: action.profile }
         default:
             return state;
     }
@@ -52,6 +54,15 @@ export const setUserProfile = (profile) => {
     return ({ type: SET_USER_PROFILE, profile })
 }
 
+export const getProfile = (userId) => {
+    return (dispatch) => {
+
+
+        profileAPI.getProfile(userId).then(data => { //response - ответ  
+            dispatch(setUserProfile(data));
+        });
+    }
+}
 
 
 export default profileReducer;
