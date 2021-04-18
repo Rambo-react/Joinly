@@ -1,9 +1,10 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { Redirect, withRouter } from 'react-router';
-import { profileAPI } from '../../api/api';
-import { setUserProfile , getProfile} from '../../redux/profile-reducer';
-import { withAuthRedirect } from '../hoc/withAuthRedirect';
+import { withRouter } from 'react-router';
+import { compose } from 'redux';
+
+import { setUserProfile , getProfile, getStatus, updateStatus} from '../../redux/profile-reducer';
+
 import Profile from "./Profile";
 
 
@@ -21,6 +22,8 @@ class ProfileContainer extends React.Component {
         }
 
         this.props.getProfile(userId);
+        //this.props.getUserStatus(userId);
+        this.props.getStatus(userId);
         // profileAPI.getProfile(userId).then(data => { //response - ответ  
         //     this.props.setUserProfile(data);
         // });
@@ -31,29 +34,35 @@ class ProfileContainer extends React.Component {
        
 
         return (
-            <Profile {...this.props} profile={this.props.profile} /> // ... разбивает на свойства и компоненты
+            <Profile {...this.props} profile={this.props.profile} status={this.props.status} updateStatus={this.props.updateStatus} /> // ... разбивает на свойства и компоненты
         )
     }
 
 }
 
-let AuthRedirectComponent = withAuthRedirect(ProfileContainer);
-
-
-
-
 let mapStateToProps = (state) => ({
-    profile: state.profilePage.profile
+    profile: state.profilePage.profile,
+    status: state.profilePage.status
 });
     
+
+export default compose (
+    connect(mapStateToProps, { setUserProfile , getProfile, getStatus, updateStatus }),
+    withRouter
+   )(ProfileContainer);
+
+// let AuthRedirectComponent = withAuthRedirect(ProfileContainer);
+
+
+
 
 
 
 
 //withRouter - для создания контейнерной компонеты и передаёт в пропсы данные из url
-let WithUrlDataContainerComponent = withRouter(AuthRedirectComponent);
+// let WithUrlDataContainerComponent = withRouter(AuthRedirectComponent);
 
-export default connect(mapStateToProps, { setUserProfile , getProfile})(WithUrlDataContainerComponent);
+// export default connect(mapStateToProps, { setUserProfile , getProfile})(WithUrlDataContainerComponent);
 
 // withRouter(ProfileContainer);
 // export default connect(mapStateToProps, {setUserProfile}) (ProfileContainer);
