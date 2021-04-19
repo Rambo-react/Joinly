@@ -1,5 +1,5 @@
 const ADD_MESSAGE = 'ADD-MESSAGE';
-const UPDATE_NEW_MESSAGE_TEXT = 'UPDATE-NEW-MESSAGE-TEXT';
+// const UPDATE_NEW_MESSAGE_TEXT = 'UPDATE-NEW-MESSAGE-TEXT';
 
 //state default
 
@@ -21,26 +21,18 @@ let InitialState = {
         { id: 4, message: "Hello" }
     ],
 
-    newMessageText: ""
-
 };
 
 const dialogsReducer = (state = InitialState, action) => {
 
     switch (action.type) {
         case ADD_MESSAGE:
-            let newMessage = { id: 5, message: state.newMessageText };
+            let newMessage = { id: 5, message: action.newMessageText };
             //сразу возвращаем, скопированный стейт, добавляем в конец массива объект newMessage и очищаем текст newMEssageText
             return {
                 ...state,
-                messagesData: [...state.messagesData, newMessage],
-                newMessageText: ''
-            }
-
-        case UPDATE_NEW_MESSAGE_TEXT:
-            return {
-                ...state,
-                newMessageText: action.newText
+                messagesData: [...state.messagesData, newMessage]
+                
             }
 
         default: return state;
@@ -48,12 +40,12 @@ const dialogsReducer = (state = InitialState, action) => {
 
 }
 
-export const addMessageActionCreator = () => {
-    return ({ type: ADD_MESSAGE })
+export const addMessage = (newMessageText) => {
+    return ({ type: ADD_MESSAGE, newMessageText })
 }
 //action с свйоствами type и newText, которые приходят из Dialogs
-export const updateNewMessageTextActionCreator = (textMessage) => {
-    return ({ type: UPDATE_NEW_MESSAGE_TEXT, newText: textMessage })
-}
+// export const updateNewMessageTextActionCreator = (textMessage) => {
+//     return ({ type: UPDATE_NEW_MESSAGE_TEXT, newText: textMessage })
+// }
 
 export default dialogsReducer;

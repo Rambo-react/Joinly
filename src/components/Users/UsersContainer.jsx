@@ -12,13 +12,6 @@ class UsersContainer extends React.Component {
 
         this.props.getUsers(this.props.currentPage, this.props.pageSize);
 
-        // this.props.toggleIsFetching(true);
-
-        // usersAPI.getUsers(this.props.currentPage, this.props.pageSize).then(data => { //response - ответ  
-        //     this.props.toggleIsFetching(false);
-        //     this.props.setUsers(data.items);
-        //     this.props.setTotalUsersCount(data.totalCount);
-        // });
     }
 
     onPageChanged =(pageNumber) => {
@@ -26,14 +19,10 @@ class UsersContainer extends React.Component {
         //, по этому мы написали в get запросе page=pageNumber, т.к. в пропсах пока что старые значения, а pageSize нам менять не надо
         this.props.getUsers(pageNumber, this.props.pageSize);
 
-        // this.props.toggleIsFetching(true);
-                                                                              this.props.setCurrentPage(pageNumber);
+
+          this.props.setCurrentPage(pageNumber);
         
-        // usersAPI.getUsers(pageNumber, this.props.pageSize)
-        // .then(data => { //response - ответ , 
-        // this.props.toggleIsFetching(false);    
-        // this.props.setUsers(data.items)
-        // });
+
     }
 
     render() {
@@ -93,7 +82,7 @@ let mapStateToProps = (state) => {
 //     toggleIsFetching, toggleFollowingProgress, getUsers})(UsersContainer);
 
     export default compose (
-        withAuthRedirect,
+         withAuthRedirect,
         connect(mapStateToProps, {follow, unfollow, 
             setUsers, setCurrentPage, setTotalUsersCount, 
             toggleIsFetching, toggleFollowingProgress, getUsers})
