@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Field, Form, reduxForm } from 'redux-form';
 import { addPost } from '../../../redux/profile-reducer';
-import { Textarea } from '../../common/Preloader/FormsControls/FormControls';
+import { Textarea } from '../../common/FormsControls/FormControls';
 import { maxLengthCreator, required } from '../../utils/validators/validators';
 import s from './MyPosts.module.css';
 import Post from './Post/Post';
