@@ -11,14 +11,15 @@ import Profile from "./Profile";
 class ProfileContainer extends React.Component {
 
     componentDidMount() {
-
-
-
+        debugger
         //передаём параметры из url 
         let userId = this.props.match.params.userId;
 
         if (!userId) {
-            userId = this.props.aithorizedUserId;
+            userId = this.props.authorizedUserId;
+            if (!userId) {
+                this.props.history.push("/login");
+            }
         }
 
         this.props.getProfile(userId);
@@ -43,14 +44,15 @@ class ProfileContainer extends React.Component {
 let mapStateToProps = (state) => ({
     profile: state.profilePage.profile,
     status: state.profilePage.status,
-    aithorizedUserId: state.auth.userId,
+    authorizedUserId: state.auth.userId,
     isAuth: state.auth.isAuth
 });
     
 
-export default compose (
-    connect(mapStateToProps, { setUserProfile , getProfile, getStatus, updateStatus }),
-    withRouter
+export default compose(
+    withRouter,
+    connect(mapStateToProps, { setUserProfile , getProfile, getStatus, updateStatus })
+    
    )(ProfileContainer);
 
 // let AuthRedirectComponent = withAuthRedirect(ProfileContainer);

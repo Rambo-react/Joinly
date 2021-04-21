@@ -14,6 +14,7 @@ let mapStateToProps = (state) => {
 
 //  ,withAuthRedirect редирект на форму ввода логина и пароля если не залогинился 
 export default compose(
+    withAuthRedirect,
     connect(mapStateToProps, {addMessage}) 
     ) (Dialogs);
 

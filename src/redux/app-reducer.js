@@ -7,7 +7,7 @@ const INITIALIZED_SUCCESS = 'INITIALIZED_SUCCESS';
 
 
 let initialState = {
-    initilized: false
+    initialized: false
 }
 
 
@@ -16,7 +16,7 @@ const appReducer = (state = initialState, action) => {
         case INITIALIZED_SUCCESS:
             return {
                 ...state,
-                initilized: true
+                initialized: true
             }
         default:
             return state;
@@ -29,7 +29,7 @@ export const initializeApp = () => {
     return (dispatch) => {
         let promise = dispatch(authMe());
         //выполнить после выполнения всех промисов
-        promise.all([promise]).then(() => {
+        Promise.all([promise]).then(() => {
             dispatch(initializedSuccess());
         });
 

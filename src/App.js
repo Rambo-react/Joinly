@@ -1,4 +1,4 @@
- import React from 'react';
+ import React, { Component } from 'react';
 //import logo from './logo.svg';
 import './App.css';
 import Navbar from './components/Navbar/Navbar';
@@ -17,7 +17,7 @@ import { compose } from 'redux';
 import Preloader from './components/common/Preloader/Preloader';
 
 
-class App extends React.Component {
+class App extends Component {
   componentDidMount() {
     this.props.initializeApp();
   }
@@ -60,7 +60,7 @@ const mapStateToProps = (state) => (
   }
 )
 
-export default compose (
+export default compose(
   withRouter,
   connect(mapStateToProps, {initializeApp})
 )(App);
