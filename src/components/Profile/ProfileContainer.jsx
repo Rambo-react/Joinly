@@ -11,7 +11,6 @@ import Profile from "./Profile";
 class ProfileContainer extends React.Component {
 
     componentDidMount() {
-        debugger
         //передаём параметры из url 
         let userId = this.props.match.params.userId;
 
