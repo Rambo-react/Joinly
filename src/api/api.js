@@ -63,12 +63,16 @@ export const profileAPI = {
 
 export const authAPI = {
     getAuthMe() {
+        debugger
         return (
             instance.get(`auth/me`)
                 .then(response => {
                     return response.data;
+                    debugger
                 })
+                
         )
+        
     },
     login(email, password, rememberMe = false) {
         return (

@@ -36,7 +36,7 @@ const profileReducer = (state = InitialState, action) => {
             }
         case DELETE_POST:
             return {
-                ...state, postsData: state.postsData.filter((p) => p.id != action.postId )
+                ...state, postsData: state.postsData.filter((p) => p.id != action.postId)
             }
 
         // case UPDATE_NEW_POST_TEXT:
@@ -74,30 +74,25 @@ export const setStatus = (status) => {
     return ({ type: SET_STATUS, status })
 }
 
-export const getProfile = (userId) => (dispatch) => {
-    profileAPI.getProfile(userId).then(response => { //response - ответ  
-        dispatch(setUserProfile(response));
-    });
+export const getProfile = (userId) => async (dispatch) => {
+    let response = await profileAPI.getProfile(userId)
+    dispatch(setUserProfile(response));
 }
 
 
-export const getStatus = (userId) => {
-    return (dispatch) => {
-        profileAPI.getStatus(userId).then(response => { //response - ответ  
-            dispatch(setStatus(response.data));
-        });
-    }
+export const getStatus = (userId) => async (dispatch) => {
+    let response = await profileAPI.getStatus(userId)
+    dispatch(setStatus(response.data));
 }
 
-export const updateStatus = (status) => {
-    return (dispatch) => {
-        profileAPI.updateStatus(status).then(response => { //response - ответ  
+
+export const updateStatus = (status) => async (dispatch) => {
+      let response = await profileAPI.updateStatus(status)
             if (response.data.resultCode === 0) {
                 dispatch(setStatus(status));
             }
-        });
     }
-}
+
 
 
 

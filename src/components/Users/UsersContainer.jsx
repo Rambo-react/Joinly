@@ -10,15 +10,16 @@ import {getCurrentPage, getFollowingInProgress, getIsFetching, getPageSize, getT
 class UsersContainer extends React.Component {
 
     componentDidMount() {
-
-        this.props.getUsers(this.props.currentPage, this.props.pageSize);
+        let {currentPage, pageSize} = this.props;
+        this.props.getUsers(currentPage, pageSize);
 
     }
 
     onPageChanged =(pageNumber) => {
+        let {pageSize} =  this.props;
         //диспатчим в стэйт номер страницы, потом сразу же выполняем запрос на сервер 
         //, по этому мы написали в get запросе page=pageNumber, т.к. в пропсах пока что старые значения, а pageSize нам менять не надо
-        this.props.getUsers(pageNumber, this.props.pageSize);
+        this.props.getUsers(pageNumber, pageSize);
 
 
           this.props.setCurrentPage(pageNumber);

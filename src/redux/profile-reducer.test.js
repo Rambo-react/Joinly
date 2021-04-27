@@ -8,7 +8,7 @@ let state = {
     ]
 };
 
-it('length of posts should be incremented', () => {
+test('length of posts should be incremented', () => {
     // 1) test data (initialisation data)
     let action = addPost("RAMBO_REACT");
     
@@ -19,7 +19,7 @@ it('length of posts should be incremented', () => {
 
 });
 
-it('message of new post should be correct', () => {
+test('message of new post should be correct', () => {
     // 1) test data (initialisation data)
     let action = addPost("RAMBO_REACT");
     // 2) action
@@ -30,7 +30,7 @@ it('message of new post should be correct', () => {
 
 });
 
-it('after deleting length array of posts should be decremented', () => {
+test('after deleting length array of posts should be decremented', () => {
     // 1) test data (initialisation data)
     let action = deletePost(1);
     // 2) action
@@ -40,7 +40,7 @@ it('after deleting length array of posts should be decremented', () => {
 });
 
 
-it(`if postId incorrect array of posts length shouldn't be decrement`, () => {
+test(`if postId incorrect array of posts length shouldn't be decrement`, () => {
     // 1) test data (initialisation data)
     let action = deletePost(1000);
     // 2) action
