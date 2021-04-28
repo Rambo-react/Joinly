@@ -8,7 +8,7 @@ import { withAuthRedirect } from '../hoc/withAuthRedirect';
 import {getCurrentPage, getFollowingInProgress, getIsFetching, getPageSize, getTotalUsersCount, getUserAll} from "../../redux/users-selectors"
 
 class UsersContainer extends React.Component {
-
+debugger
     componentDidMount() {
         let {currentPage, pageSize} = this.props;
         this.props.getUsers(currentPage, pageSize);
@@ -28,7 +28,6 @@ class UsersContainer extends React.Component {
     }
 
     render() {
-
         return (
             <>
             {this.props.isFetching ? <Preloader/> : null}

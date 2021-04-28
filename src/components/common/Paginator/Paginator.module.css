@@ -1,8 +1,13 @@
-.selectedPage {
-    font-weight: bold;
+.containerPages {
+    margin: 5px;
 }
 
-.containerPages {
-    max-width: 760px;
-    overflow: auto;
+.pageNumber {
+    border: 1px grey solid;
+    padding: 2px;
+}
+
+.pageNumber.selectedPage {
+    font-weight: bold;
+    border-color: black;
 }
