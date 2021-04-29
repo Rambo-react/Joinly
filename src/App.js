@@ -1,4 +1,4 @@
- import React, { Component } from 'react';
+import React, { Component, Suspense } from 'react';
 //import logo from './logo.svg';
 import './App.css';
 import Navbar from './components/Navbar/Navbar';
@@ -6,19 +6,24 @@ import { Route, withRouter } from 'react-router-dom';
 import Music from './components/Music/Music';
 import News from './components/News/News';
 import Settings from './components/Settings/Settings';
-import DialogsContainer from './components/Dialogs/DialogsContainer';
+//import DialogsContainer from './components/Dialogs/DialogsContainer';
 import UsersContainer from './components/Users/UsersContainer';
-import ProfileContainer from './components/Profile/ProfileContainer';
+//import ProfileContainer from './components/Profile/ProfileContainer';
 import HeaderContainer from './components/Header/HeaderContainer';
 import Login from './components/Login/Login';
 import { connect } from 'react-redux';
-import {initializeApp} from './redux/app-reducer'
+import { initializeApp } from './redux/app-reducer'
 import { compose } from 'redux';
 import Preloader from './components/common/Preloader/Preloader';
 import { BrowserRouter } from 'react-router-dom';
 import store from './redux/redux-store';
 import { Provider } from 'react-redux';
+import { withSuspense } from './components/hoc/withSuspense';
 
+
+
+const DialogsContainer = React.lazy(() => import('./components/Dialogs/DialogsContainer'))
+const ProfileContainer = React.lazy(() => import('./components/Profile/ProfileContainer'))
 
 class App extends Component {
   componentDidMount() {
@@ -28,7 +33,7 @@ class App extends Component {
 
   render() {
     if (!this.props.initialized) {
-     return  <Preloader />
+      return <Preloader />
     }
 
     return (
@@ -38,9 +43,15 @@ class App extends Component {
         <Navbar />
         <div className='app-wrapper-content'>
 
-          <Route path='/dialogs' render={() => <DialogsContainer />} />
+          <Route path='/dialogs' render={withSuspense(DialogsContainer)} />
           {/* :userId - озночает что у нас есть какие-то параметры, ? - озночает что это не обязательный параметр */}
-          <Route path='/profile/:userId?' render={() => <ProfileContainer />} />
+          <Route path='/profile/:userId?' render={() => {
+            return (
+              <Suspense fallback={<div> Loading ...</div>} >
+                <ProfileContainer />
+              </Suspense>
+            )
+          }} />
 
           <Route path='/news' component={News} />
           <Route path='/music' component={Music} />
@@ -65,18 +76,18 @@ const mapStateToProps = (state) => (
 
 let AppContainer = compose(
   withRouter,
-  connect(mapStateToProps, {initializeApp})
+  connect(mapStateToProps, { initializeApp })
 )(App);
 
 let MainApp = (props) => {
   return (
     <BrowserRouter>
-          
-    <Provider store={store}>
-    <AppContainer  />
-    </Provider>
 
-  </BrowserRouter>
+      <Provider store={store}>
+        <AppContainer />
+      </Provider>
+
+    </BrowserRouter>
   )
 }
 
