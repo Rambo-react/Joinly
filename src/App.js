@@ -15,7 +15,7 @@ import { connect } from 'react-redux';
 import { initializeApp } from './redux/app-reducer'
 import { compose } from 'redux';
 import Preloader from './components/common/Preloader/Preloader';
-import { BrowserRouter } from 'react-router-dom';
+import { BrowserRouter, HashRouter } from 'react-router-dom';
 import store from './redux/redux-store';
 import { Provider } from 'react-redux';
 import { withSuspense } from './components/hoc/withSuspense';
@@ -81,7 +81,8 @@ let AppContainer = compose(
 
 let MainApp = (props) => {
   return (
-    <BrowserRouter>
+    //HashRouter - что бы добавить /#/ в УРЛ , т.е. сервак будет думать что index.html сидит в папке до # , что бы на гит пэйдже нормально отображалось
+    <BrowserRouter basename={process.env.PUBLIC_URL}>
 
       <Provider store={store}>
         <AppContainer />
