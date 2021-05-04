@@ -11,7 +11,7 @@ import Profile from "./Profile";
 class ProfileContainer extends React.Component {
 
     refreshProfile() {
-        //передаём параметры из url 
+        //передаём параметры из url с помощью withRouter (передаёт в пропсы данные которые связаны с url)
         let userId = this.props.match.params.userId;
 
         if (!userId) {

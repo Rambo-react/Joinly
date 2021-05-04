@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import s from './Paginator.module.css';
+// import cn from 'classnames';
 
 let Paginator = ({ currentPage, pageSize, onPageChanged, totaltemsCount, portionSize = 10 }) => {
     //расчет количества страниц и создание массива для этих номеров(math.ceil округление до целого числа в большую сторону)
@@ -30,8 +31,11 @@ let Paginator = ({ currentPage, pageSize, onPageChanged, totaltemsCount, portion
                     .filter(p => p >= leftPortionPageNumber && p <= rightPortionPageNumber)
                     .map(p => {
                         return (<span className={`${s.pageNumber} ${currentPage === p && s.selectedPage}`}
-                            onClick={(e) => { onPageChanged(p) }} key={p} >{p}</span>)
+                                onClick={(e) => { onPageChanged(p) }} key={p} >{p}</span>)
                     })}
+
+                    {/* // объявление классов можно сделать через classnames
+                      // return (<span className={ cn ({s.pageNumber, [s.selectedPage]: currentPage === p }) } */}
 
                 {portionNumber < portionCount && <button onClick={() => { setPortionNumber(portionNumber + 1) }}> &gt; </button>}
             </div>
