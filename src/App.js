@@ -80,7 +80,7 @@ class App extends Component {
             <Route path='/music' component={Music} />
             <Route path='/settings' component={Settings} />
 
-            <Route path='/users' render={() => <UsersContainer />} />
+            <Route path='/users' render={() => <UsersContainer pageTitle = {"Users Title"}/>} />
 
             {/* <Route path='/login/facebook' render={() => <div>Facebook</div>} /> */}
 
